@@ -23,5 +23,15 @@ namespace TaskManagementSystemMITT.Models
             }
 
         }
+
+        public static void DeleteRole(string roleName)
+        {
+            if(roleManager.RoleExists(roleName))
+            {
+                var role = roleManager.FindByName(roleName);
+                roleManager.Delete(role);
+                
+            }
+        }
     }
 }
