@@ -12,8 +12,9 @@ namespace TaskManagementSystemMITT.Models
         public int Body { get; set; }
         public DateTime DateTime { get; set; }
         public bool Urgent { get; set; }
+        
         public virtual ApplicationUser User { get; set; }
-        [ForeignKey("ApplicationUser")]
+        
         public string UserId { get; set; }
         /*public bool IsOpened { get; set; }*/
     }

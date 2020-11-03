@@ -15,8 +15,9 @@ namespace TaskManagementSystemMITT.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual ICollection<ProjectTask> ProjectTasks { get; set; }
+        
         public virtual ApplicationUser User { get; set; }
-        [ForeignKey("ApplicationUser")]
+        
         public string UserId { get; set; }
 
     }

@@ -22,8 +22,9 @@ namespace TaskManagementSystemMITT.Models
         public DateTime EndDateTime { get; set; }
         public int ProjectId { get; set; }
         public virtual Project Project { get; set; }
+        
         public virtual ApplicationUser User { get; set; }
-        [ForeignKey("ApplicationUser")]
+        
         public string UserId { get; set; }
         public bool IsCompleted { get; set; }
         /*public Priority Priority { get; set; }*/
