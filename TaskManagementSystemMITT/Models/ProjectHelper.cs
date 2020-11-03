@@ -15,7 +15,7 @@ namespace TaskManagementSystemMITT.Models
             {
                 return false;
             }
-            db.Projects.Add(new Project() { Name = name, ProjectManagerId = projectManagerId });
+            db.Projects.Add(new Project() { Name = name, UserId = projectManagerId });
             return true;
         }
 
@@ -43,7 +43,7 @@ namespace TaskManagementSystemMITT.Models
 
         public static List<ProjectTask> AllTasksByProject(int id)
         {
-            return db.Projects.Find(id).ProjectTasks.toList();
+            return db.Projects.Find(id).ProjectTasks.ToList();
         }
     }
 }
