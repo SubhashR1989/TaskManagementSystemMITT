@@ -63,7 +63,7 @@ namespace TaskManagementSystemMITT.Models
             return result;
         }
 
-        public static ApplicationUser CreateUser(string Email, string roleName)
+        /*public static ApplicationUser CreateUser(string Email, string roleName)
         {
             var user = new ApplicationUser() { UserName = Email, Email = Email };
             userManager.AddToRole(user.Id, roleName);
@@ -79,7 +79,7 @@ namespace TaskManagementSystemMITT.Models
             userManager.RemoveFromRole(userId, currentUserRole);
             userManager.Delete(user);
 
-        }
+        }*/
     }
 }
 
