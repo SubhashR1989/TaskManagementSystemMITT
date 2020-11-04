@@ -13,12 +13,14 @@ namespace TaskManagementSystemMITT.Models
     {
         public ApplicationUser()
         {
-            this.Notifications = new HashSet<Notification>();
+            Notifications = new HashSet<Notification>();
+            Projects = new HashSet<Project>();
+            Tasks = new HashSet<ProjectTask>();   
         }
 
         public virtual ICollection<Notification> Notifications { get; set; }
-
-
+        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<ProjectTask> Tasks { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
