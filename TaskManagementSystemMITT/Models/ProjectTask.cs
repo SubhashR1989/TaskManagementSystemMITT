@@ -27,14 +27,14 @@ namespace TaskManagementSystemMITT.Models
         
         public string UserId { get; set; }
         public bool IsCompleted { get; set; }
-        /*public Priority Priority { get; set; }*/
+        public Priority Priority { get; set; }
         
     }
 
-    /*public enum Priority
+    public enum Priority
     {
         High,
         Medium,
         Low
-    }*/
+    }
 }

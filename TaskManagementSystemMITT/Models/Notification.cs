@@ -16,6 +16,6 @@ namespace TaskManagementSystemMITT.Models
         public virtual ApplicationUser User { get; set; }
         
         public string UserId { get; set; }
-        /*public bool IsOpened { get; set; }*/
+        public bool IsOpened { get; set; }
     }
 }

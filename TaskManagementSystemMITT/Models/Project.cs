@@ -10,7 +10,7 @@ namespace TaskManagementSystemMITT.Models
     {
         public Project()
         {
-            this.ProjectTasks = new HashSet<ProjectTask>();
+            ProjectTasks = new HashSet<ProjectTask>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
