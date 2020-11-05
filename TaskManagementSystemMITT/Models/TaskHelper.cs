@@ -7,12 +7,11 @@ namespace TaskManagementSystemMITT.Models
 {
     public class TaskHelper
     {
-<<<<<<< Updated upstream
         public int Id { get; set; }
         public string Name { get; set; }
         public string ProjectManagerId { get; set; }
         public ApplicationUser ProjectManager { get; set; }
-=======
+
         static ApplicationDbContext db = new ApplicationDbContext();
 
         public static bool CreateTask(ProjectTask task)
