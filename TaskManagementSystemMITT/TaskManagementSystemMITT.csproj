@@ -177,6 +177,10 @@
     <Compile Include="Migrations\202011031638522_Initial.Designer.cs">
       <DependentUpon>202011031638522_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011051724485_FinishBaseicClasses.cs" />
+    <Compile Include="Migrations\202011051724485_FinishBaseicClasses.Designer.cs">
+      <DependentUpon>202011051724485_FinishBaseicClasses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -294,6 +298,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011031638522_Initial.resx">
       <DependentUpon>202011031638522_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011051724485_FinishBaseicClasses.resx">
+      <DependentUpon>202011051724485_FinishBaseicClasses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
