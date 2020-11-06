@@ -186,6 +186,10 @@
     <Compile Include="Migrations\202011060031115_addedCommentPropToTasks.Designer.cs">
       <DependentUpon>202011060031115_addedCommentPropToTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011060049319_AddedPercentCompletedPropToTasks.cs" />
+    <Compile Include="Migrations\202011060049319_AddedPercentCompletedPropToTasks.Designer.cs">
+      <DependentUpon>202011060049319_AddedPercentCompletedPropToTasks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -314,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011060031115_addedCommentPropToTasks.resx">
       <DependentUpon>202011060031115_addedCommentPropToTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011060049319_AddedPercentCompletedPropToTasks.resx">
+      <DependentUpon>202011060049319_AddedPercentCompletedPropToTasks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
