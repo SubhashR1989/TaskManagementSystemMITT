@@ -11,7 +11,8 @@ using TaskManagementSystemMITT.Models;
 
 namespace TaskManagementSystemMITT.Controllers
 {
-    [Authorize(Roles = "Developer,Project Manager")]
+    //[Authorize(Roles = "Developer,Project Manager")]
+    [Authorize]
     public class DevDashboardController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
