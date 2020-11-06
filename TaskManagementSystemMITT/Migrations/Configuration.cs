@@ -6,6 +6,7 @@ namespace TaskManagementSystemMITT.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Web.UI.WebControls;
     using TaskManagementSystemMITT.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<TaskManagementSystemMITT.Models.ApplicationDbContext>
@@ -73,8 +74,44 @@ namespace TaskManagementSystemMITT.Migrations
                 manager.AddToRole(user.Id, "Manager");
             }
 
+            /*------------------------------------------------------------------------------------------------------*/
+            /*Creating a Project*/
+            Project[] projects =
+            {
+                new Project
+                {                   
+                    Name = "TaskManagementSystemtMITT",                                   
+                }
+            };
+            context.Projects.AddOrUpdate(t => t.Name, projects);
 
 
+            /*------------------------------------------------------------------------------------------------------*/
+            /*Creating two Tasks*/
+            ProjectTask[] tasks =
+            {
+                new ProjectTask
+                {                  
+                    Name = "Seed method",
+                    Description = "Writing seed method for task management system",                                   
+                    StartDateTime = DateTime.Parse("05/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    EndDateTime = DateTime.Parse("15/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    IsCompleted = false,
+                    Priority = Priority.High,
+                },
+
+                new ProjectTask
+                {                   
+                    Name = "Project Helper view",
+                    Description = "Creating project helper controller and view for task management system",
+                    StartDateTime = DateTime.Parse("07/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    EndDateTime = DateTime.Parse("12/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    IsCompleted = true,
+                    Priority = Priority.Medium,
+                }
+            };
+            context.Tasks.AddOrUpdate(t => t.Description, tasks);
+           
         }
     }
 }
