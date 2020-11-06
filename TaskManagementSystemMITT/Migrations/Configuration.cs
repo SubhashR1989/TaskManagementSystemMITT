@@ -3,6 +3,7 @@ namespace TaskManagementSystemMITT.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -19,7 +20,6 @@ namespace TaskManagementSystemMITT.Migrations
         protected override void Seed(TaskManagementSystemMITT.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
-
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             context.Database.ExecuteSqlCommand("sp_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'");
@@ -45,73 +45,103 @@ namespace TaskManagementSystemMITT.Migrations
 
             /*------------------------------------------------------------------------------------------------------*/
             /*Creating and adding one user to each role*/
-            if (!context.Users.Any(u => u.UserName == "developer@mysite.com"))
+            var PasswordHash = new PasswordHasher();
+            var user1 = new ApplicationUser
             {
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var PasswordHash = new PasswordHasher();
-                var user = new ApplicationUser
-                {
-                    UserName = "developer@mysite.com",
-                    Email = "developer@mysite.com",
-                    PasswordHash = PasswordHash.HashPassword("123456")
-                };
-                manager.Create(user);
-                manager.AddToRole(user.Id, "Developer");
-            }
+                UserName = "manager@mysite.com",
+                Email = "manager@mysite.com",
+                PasswordHash = PasswordHash.HashPassword("123456")
+            };
             if (!context.Users.Any(u => u.UserName == "manager@mysite.com"))
             {
                 var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var PasswordHash = new PasswordHasher();
-                var user = new ApplicationUser
-                {
-                    UserName = "manager@mysite.com",
-                    Email = "manager@mysite.com",
-                    PasswordHash = PasswordHash.HashPassword("123456")
-                };
-                manager.Create(user);
-                manager.AddToRole(user.Id, "Manager");
+                var manager = new UserManager<ApplicationUser>(store);                                
+                manager.Create(user1);
+                manager.AddToRole(user1.Id, "Manager");
             }
-
+            
+            var user2 = new ApplicationUser
+            {
+                UserName = "developer@mysite.com",
+                Email = "developer@mysite.com",
+                PasswordHash = PasswordHash.HashPassword("123456")
+            };
+            if (!context.Users.Any(u => u.UserName == "developer@mysite.com"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);               
+                manager.Create(user2);
+                manager.AddToRole(user2.Id, "Developer");
+            }
             /*------------------------------------------------------------------------------------------------------*/
-            /*Creating a Project*/
+            /*Creating a Project and adding User1 to these tasks*/
             Project[] projects =
             {
                 new Project
-                {                   
-                    Name = "TaskManagementSystemtMITT",                                   
+                {
+                    Id = 1,
+                    Name = "TaskManagementSystemtMITT",
+                    UserId = user1.Id
+                },
+                new Project
+                {
+                    Id = 2,
+                    Name = "TrelloManagementSystem",
+                    UserId = user1.Id
                 }
             };
             context.Projects.AddOrUpdate(t => t.Name, projects);
 
-
             /*------------------------------------------------------------------------------------------------------*/
-            /*Creating two Tasks*/
+            /*Creating two Tasks and adding User2 to these tasks*/
             ProjectTask[] tasks =
             {
                 new ProjectTask
-                {                  
+                {
                     Name = "Seed method",
-                    Description = "Writing seed method for task management system",                                   
+                    Description = "Writing seed method for task management system",
+                    StartDateTime = DateTime.Parse("06/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    EndDateTime = DateTime.Parse("18/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    IsCompleted = false,
+                    Priority = Priority.High,
+                    UserId = user2.Id,
+                    ProjectId = 1
+                },
+                new ProjectTask
+                {
+                    Name = "Project Helper class",
+                    Description = "Create Project helper class",
                     StartDateTime = DateTime.Parse("05/11/2020", new System.Globalization.CultureInfo("pt-BR")),
                     EndDateTime = DateTime.Parse("15/11/2020", new System.Globalization.CultureInfo("pt-BR")),
                     IsCompleted = false,
                     Priority = Priority.High,
+                    UserId = user2.Id,
+                    ProjectId = 2
                 },
-
                 new ProjectTask
-                {                   
+                {
+                    Name = "Task Helper method",
+                    Description = "Creating task helper classes and methods",
+                    StartDateTime = DateTime.Parse("05/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    EndDateTime = DateTime.Parse("11/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    IsCompleted = true,
+                    Priority = Priority.Low,
+                    UserId = user2.Id,
+                    ProjectId = 2
+                },
+                 new ProjectTask
+                 {
                     Name = "Project Helper view",
                     Description = "Creating project helper controller and view for task management system",
-                    StartDateTime = DateTime.Parse("07/11/2020", new System.Globalization.CultureInfo("pt-BR")),
-                    EndDateTime = DateTime.Parse("12/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    StartDateTime = DateTime.Parse("04/11/2020", new System.Globalization.CultureInfo("pt-BR")),
+                    EndDateTime = DateTime.Parse("09/11/2020", new System.Globalization.CultureInfo("pt-BR")),
                     IsCompleted = true,
                     Priority = Priority.Medium,
-                }
+                    UserId = user2.Id,
+                    ProjectId = 2                   
+                 }
             };
             context.Tasks.AddOrUpdate(t => t.Description, tasks);
-           
         }
     }
 }
