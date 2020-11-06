@@ -16,12 +16,12 @@ namespace TaskManagementSystemMITT.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Projects
-        [Authorize(Roles = "ProjectManager")]
-        public ActionResult Index()
-        {
-            var projects = db.Projects.Include(p => p.User).Where(p => p.UserId == User.Identity.GetUserId());
-            return View(projects.ToList());
-        }
+        //[Authorize(Roles = "ProjectManager")]
+        //public ActionResult Index()
+        //{
+        //    var projects = db.Projects.Include(p => p.User).Where(p => p.UserId == User.Identity.GetUserId());
+        //    return View(projects.ToList());
+        //}
 
         // GET: Projects/Details/5
         [Authorize(Roles = "ProjectManager")]
@@ -51,17 +51,10 @@ namespace TaskManagementSystemMITT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "ProjectManager")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Project project)
+        public ActionResult Create(string name)
         {
-            project.UserId = User.Identity.GetUserId();
-            if (ModelState.IsValid)
-            {
-                db.Projects.Add(project);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(project);
+            ProjectHelper.CreateProject(name, User.Identity.GetUserId());
+            return RedirectToAction("Index", "Manage");
         }
 
         // GET: Projects/Edit/5
@@ -85,17 +78,10 @@ namespace TaskManagementSystemMITT.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "ProjectManager")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Project project)
+        public ActionResult Edit(int? id, string name)
         {
-            project.UserId = User.Identity.GetUserId();
-            if (ModelState.IsValid)
-            {
-                db.Entry(project).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(project);
+            ProjectHelper.EditProject(id, name);
+            return RedirectToAction("Index", "Manage");
         }
 
         // GET: Projects/Delete/5
@@ -117,13 +103,10 @@ namespace TaskManagementSystemMITT.Controllers
         // POST: Projects/Delete/5
         [Authorize(Roles = "ProjectManager")]
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Project project = db.Projects.Find(id);
-            db.Projects.Remove(project);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            ProjectHelper.DeleteProject(id);
+            return RedirectToAction("Index", "Manage");
         }
 
         protected override void Dispose(bool disposing)
