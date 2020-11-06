@@ -1,4 +1,5 @@
 ﻿using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,9 +19,11 @@ namespace TaskManagementSystemMITT.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: DevDashboard
-        public ActionResult Index(string userId)
+        public ActionResult Index()
         {
-            var results = TaskHelper.GetAllTaskByUser(userId).ToList();
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var results = TaskHelper.GetAllTaskByUser(user.Id).ToList();
+            ViewBag.Username = user.UserName;
 
             return View(results);
         }
@@ -48,6 +51,7 @@ namespace TaskManagementSystemMITT.Controllers
                 task.IsCompleted = true;
             }
             return View();
-        }       
+        }
+
     }
 }
