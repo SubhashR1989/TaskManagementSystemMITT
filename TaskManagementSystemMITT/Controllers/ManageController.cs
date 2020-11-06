@@ -15,6 +15,7 @@ namespace TaskManagementSystemMITT.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -70,7 +71,8 @@ namespace TaskManagementSystemMITT.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Projects = db.Users.Find(userId).Projects.ToList()
             };
             return View(model);
         }

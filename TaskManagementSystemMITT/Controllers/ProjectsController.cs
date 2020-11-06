@@ -24,7 +24,7 @@ namespace TaskManagementSystemMITT.Controllers
         //}
 
         // GET: Projects/Details/5
-        [Authorize(Roles = "ProjectManager")]
+        [Authorize(Roles = "Project Manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,7 +40,7 @@ namespace TaskManagementSystemMITT.Controllers
         }
 
         // GET: Projects/Create
-        [Authorize(Roles = "ProjectManager")]
+        [Authorize(Roles = "Project Manager")]
         public ActionResult Create()
         {
             return View();
