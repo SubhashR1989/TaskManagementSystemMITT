@@ -37,9 +37,14 @@ namespace TaskManagementSystemMITT.Models
         public DbSet<ProjectTask> Tasks { get; set; }
         public DbSet<Notification> Notifications { get; set; }
 
+        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseAlways<ApplicationDbContext>());
+        }*/
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
-        {
+        {         
         }
 
         public static ApplicationDbContext Create()
