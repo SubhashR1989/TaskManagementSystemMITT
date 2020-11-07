@@ -3,28 +3,73 @@
 @{
     ViewBag.Title = "Index";
 }
-<h4>Dashboard for @ViewBag.Username</h4>
-<h4>Tasks:</h4>
-@foreach (var task in Model)
-{
-    <table style="width:70%">
-        <tr>
-            <th>Task</th>
-        </tr>
-        <tr>
-            <td>@task.Description</td>
-        </tr>
-    </table>
 
-
-    if (task.IsCompleted == true)
-    {
-        @Html.ActionLink("Add Comment ", "AddComment")
-
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
     }
 
+    th, td {
+        padding: 5px;
+        text-align: left;
+    }
+    
+</style>
+<h4>Dashboard for @ViewBag.Username</h4>
+<h4>Tasks:</h4>
+
+<h5>Working</h5>
+@foreach (var task in Model)
+{
+    if (!task.IsCompleted)
+    {
+<table style="width: 25%;border:groove; border-width: thin; ">
+    <tr>
+        <th>Task</th>
+    </tr>
+    <tr>
+        <td>@task.Description</td>
+    </tr>
+    <tr>
+        <td>@(task.PercentCompleted < 100 ? @Html.ActionLink("Update Progress ", "UpdateProgress", "TaskHelper", new { Id = task.Id },null) :
+            @Html.ActionLink("Move to Completed", "MarkCompleted","TaskHelper", new { Id = task.Id },null)) </td>
+    </tr>
+
+</table>
+    <br />
+    }
 }
+<h5>Completed</h5>
+
+@foreach (var task in Model)
+{
+    if (task.IsCompleted)
+    {
+        <table style="width: 25%;border:groove; border-width: thin; ">
+
+            <tr>
+                <th>Task</th>
+            </tr>
+            <tr>
+                <td>@task.Description</td>
+            </tr>
+            <tr>
+                <td>@(task.Comment == null ? @Html.ActionLink( "Add a Comment", "AddComment","TaskHelper", new{ Id = task.Id },null) :
+                    @Html.ActionLink("View Comments", "ViewComment", "TaskHelper", new { Id = task.Id }, null)) </td>
+            </tr>
+        </table>
+        <br />
+
+
+    }
+}
+
+
+
 <!---
+
+
         <td>
             Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             Html.ActionLink("Details", "Details", new { id=item.Id }) |
