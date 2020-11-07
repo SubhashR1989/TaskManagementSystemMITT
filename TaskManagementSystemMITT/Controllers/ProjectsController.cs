@@ -24,7 +24,7 @@ namespace TaskManagementSystemMITT.Controllers
         //}
 
         // GET: Projects/Details/5
-        [Authorize(Roles = "Project Manager")]
+        [Authorize(Roles = "Manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,7 +40,7 @@ namespace TaskManagementSystemMITT.Controllers
         }
 
         // GET: Projects/Create
-        [Authorize(Roles = "Project Manager")]
+        [Authorize(Roles = "Manager")]
         public ActionResult Create()
         {
             return View();
@@ -49,7 +49,7 @@ namespace TaskManagementSystemMITT.Controllers
         // POST: Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "ProjectManager")]
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         public ActionResult Create(string name)
         {
@@ -58,7 +58,7 @@ namespace TaskManagementSystemMITT.Controllers
         }
 
         // GET: Projects/Edit/5
-        [Authorize(Roles = "ProjectManager")]
+        [Authorize(Roles = "Manager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -76,7 +76,7 @@ namespace TaskManagementSystemMITT.Controllers
         // POST: Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "ProjectManager")]
+        [Authorize(Roles = "Manager")]
         [HttpPost]
         public ActionResult Edit(int? id, string name)
         {
@@ -85,7 +85,7 @@ namespace TaskManagementSystemMITT.Controllers
         }
 
         // GET: Projects/Delete/5
-        [Authorize(Roles = "ProjectManager")]
+        [Authorize(Roles = "Manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -101,7 +101,7 @@ namespace TaskManagementSystemMITT.Controllers
         }
 
         // POST: Projects/Delete/5
-        [Authorize(Roles = "ProjectManager")]
+        [Authorize(Roles = "Manager")]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
