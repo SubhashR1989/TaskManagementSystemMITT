@@ -55,7 +55,7 @@ namespace TaskManagementSystemMITT.Models
             return db.Tasks.Where(i => i.Id == id).FirstOrDefault();
         }
 
-        public static IList<ProjectTask> GetAllTaskByUser(string Userid)
+        public static List<ProjectTask> GetAllTaskByUser(string Userid)
         {
             return db.Tasks.Where(i => i.User.Id == Userid).ToList();
         }
