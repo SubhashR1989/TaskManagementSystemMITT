@@ -72,8 +72,17 @@ namespace TaskManagementSystemMITT.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                Projects = db.Users.Find(userId).Projects.ToList()
             };
+
+            if (User.IsInRole("Manager"))
+            { 
+                model.Projects = db.Users.Find(userId).Projects.ToList();
+            }
+            if (User.IsInRole("Developer"))
+            {
+                model.Tasks = db.Users.Find(userId).Tasks.ToList();
+            }
+
             return View(model);
         }
 

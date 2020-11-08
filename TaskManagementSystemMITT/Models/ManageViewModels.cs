@@ -13,6 +13,7 @@ namespace TaskManagementSystemMITT.Models
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
         public List<Project> Projects { get; set; }
+        public List<ProjectTask> Tasks { get; set; }
     }
 
     public class ManageLoginsViewModel
