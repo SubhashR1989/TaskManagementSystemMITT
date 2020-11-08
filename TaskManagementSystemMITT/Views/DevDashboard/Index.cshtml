@@ -15,10 +15,26 @@
         text-align: left;
     }
     
+    .floatleft {
+        width: 50%;
+        float: left;
+    }
+
+    .floatright {
+        width: 50%;
+        float: right;
+    }
+
+    .container {
+        overflow: hidden;
+    }
+    
 </style>
 <h4>Dashboard for @ViewBag.Username</h4>
 <h4>Tasks:</h4>
 
+<div class="container">
+    <div class="floatleft">
 <h5>Working</h5>
 @foreach (var task in Model)
 {
@@ -40,6 +56,8 @@
     <br />
     }
 }
+        </div>
+    <div class="floatright">
 <h5>Completed</h5>
 
 @foreach (var task in Model)
@@ -64,6 +82,8 @@
 
     }
 }
+    </div>
+    </div>
 
 
 
