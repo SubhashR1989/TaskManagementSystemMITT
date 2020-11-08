@@ -47,7 +47,7 @@ namespace TaskManagementSystemMITT.Models
 
         public static List<ProjectTask> AllTasksByProject(int id)
         {
-            return db.Projects.Find(id).ProjectTasks.ToList();
+            return db.Tasks.Where(i => i.ProjectId == id).ToList();
         }
 
         public static List<Project> AllProjectsByUser(string id)
