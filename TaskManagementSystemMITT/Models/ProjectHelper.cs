@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,7 @@ namespace TaskManagementSystemMITT.Models
                 return false;
             }
             db.Projects.Add(new Project() { Name = name, UserId = projectManagerId });
+            db.SaveChanges();
             return true;
         }
 
@@ -24,13 +26,15 @@ namespace TaskManagementSystemMITT.Models
             if (db.Projects.Any(p => p.Id == id))
             {
                 var proj = db.Projects.Find(id);
+                proj.ProjectTasks.ForEach(t => db.Tasks.Remove(t));
                 db.Projects.Remove(proj);
+                db.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        public static bool EditProject(int id, string name)
+        public static bool EditProject(int? id, string name)
         {
             if (db.Projects.Any(p => p.Id == id) && !db.Projects.Any(p => p.Name == name))
             {
@@ -44,6 +48,11 @@ namespace TaskManagementSystemMITT.Models
         public static List<ProjectTask> AllTasksByProject(int id)
         {
             return db.Projects.Find(id).ProjectTasks.ToList();
+        }
+
+        public static List<Project> AllProjectsByUser(int id)
+        {
+            return db.Users.Find(id).Projects.ToList();
         }
     }
 }
