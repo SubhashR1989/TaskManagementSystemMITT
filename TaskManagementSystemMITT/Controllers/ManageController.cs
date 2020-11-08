@@ -350,6 +350,7 @@ namespace TaskManagementSystemMITT.Controllers
         public ActionResult GetAllTasksForProject(int Id)
         {
             ViewBag.Project = db.Projects.Find(Id);
+
             var result = ProjectHelper.AllTasksByProject(Id);
             return View(result);
         }

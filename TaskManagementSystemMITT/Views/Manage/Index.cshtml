@@ -108,6 +108,9 @@ else
                 <td>@project.Description</td>
             </tr>
             <tr>
+                <td>Due Date: @project.DueDate.ToString()</td>
+            </tr>
+            <tr>
                 <td>
                     Tasks remaining: @project.ProjectTasks.Count() | &nbsp; @Html.ActionLink("View Tasks", "GetAllTasksForProject", "Manage", new { Id = project.Id, }, null)
                 </td>
